@@ -31,7 +31,13 @@
                             <td>
                                 <div class="buttons">
                                     <a href="#" class="btn icon btn-primary"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
+                                    <form method="post" action="{{ route('admin.hapus_kategori', $kategori->id) }}">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

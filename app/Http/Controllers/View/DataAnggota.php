@@ -100,7 +100,6 @@ class DataAnggota extends Controller
         }
         return redirect()->route('admin.data-anggota')->with("status", "danger")->with('message', 'Gagal Menambah Anggota');
     }
-
     public function submit_admin(Request $request)
     {
         $date = date("Y-m-d");
@@ -175,5 +174,27 @@ class DataAnggota extends Controller
             );
         }
         return redirect()->route('admin.data-admin')->with("status", "danger")->with('message', 'Gagal Menambah Admin');
+    }
+
+    // Delete Data
+    public function hapus_anggota($id)
+    {
+        $anggota = User::findOrFail($id);
+        $anggota->delete();
+
+        if ($anggota) {
+            return redirect()->back()->with('status', 'success')->with('message', 'Anggota berhasil dihapus');
+        }
+        return redirect()->back()->with('status', 'danger')->with('message', 'Anggota gagal dihapus');
+    }
+    public function hapus_admin($id)
+    {
+        $admin = User::findOrFail($id);
+        $admin->delete();
+
+        if ($admin) {
+            return redirect()->back()->with('status', 'success')->with('message', 'Admin berhasil dihapus');
+        }
+        return redirect()->back()->with('status', 'danger')->with('message', 'Admin gagal dihapus');
     }
 }

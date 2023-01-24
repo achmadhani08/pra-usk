@@ -9,8 +9,8 @@ use App\Http\Controllers\View\DataBuku;
 use App\Http\Controllers\View\Pesan;
 use App\Http\Controllers\View\Laporan;
 use App\Http\Controllers\View\Profile;
-// use App\Http\Controllers\View\Peminjaman;
-// use App\Http\Controllers\View\Pengembalian;
+use App\Http\Controllers\View\Peminjaman;
+use App\Http\Controllers\View\Pengembalian;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +47,7 @@ Route::group(
 
                         Route::controller(DataAnggota::class)->group(
                             function () {
+                                // Admin
                                 Route::get(
                                     '/data-admin',
                                     'data_admin'
@@ -55,6 +56,9 @@ Route::group(
                                     'submit_admin',
                                     'submit_admin'
                                 )->name('admin.submit_admin');
+                                Route::delete('/hapus-admin/{id}', 'hapus_admin')->name('admin.hapus_admin');
+
+                                // Anggota
                                 Route::get(
                                     '/data-anggota',
                                     'data_anggota'
@@ -63,6 +67,7 @@ Route::group(
                                     'submit_anggota',
                                     'submit_anggota'
                                 )->name('admin.submit_anggota');
+                                Route::delete('/hapus-anggota/{id}', 'hapus_anggota')->name('admin.hapus_anggota');
                             }
                         );
 
@@ -156,63 +161,63 @@ Route::group(
                             [Dashboard::class, 'user']
                         )->name('user.dashboard');
 
-                        // Route::controller(Peminjaman::class)->group(
-                        //     function () {
-                        //         Route::get(
-                        //             'peminjaman',
-                        //             'show_peminjaman'
-                        //         )->name('user.peminjaman');
-                        //         Route::get(
-                        //             'peminjaman/form',
-                        //             'peminjaman_form'
-                        //         )->name('user.form_peminjaman');
-                        //         Route::post(
-                        //             'form_peminjaman',
-                        //             'peminjaman_dashboard'
-                        //         )->name('user.form_peminjaman_dashboard');
-                        //         Route::post(
-                        //             'submit_peminjaman',
-                        //             'submit_peminjaman'
-                        //         )->name('user.submit_peminjaman');
-                        //     }
-                        // );
+                        Route::controller(Peminjaman::class)->group(
+                            function () {
+                                Route::get(
+                                    'peminjaman',
+                                    'show_peminjaman'
+                                )->name('user.peminjaman');
+                                Route::get(
+                                    'peminjaman/form',
+                                    'peminjaman_form'
+                                )->name('user.form_peminjaman');
+                                Route::post(
+                                    'form_peminjaman',
+                                    'peminjaman_dashboard'
+                                )->name('user.form_peminjaman_dashboard');
+                                Route::post(
+                                    'submit_peminjaman',
+                                    'submit_peminjaman'
+                                )->name('user.submit_peminjaman');
+                            }
+                        );
 
-                        // Route::controller(Pengembalian::class)->group(
-                        //     function () {
-                        //         Route::get(
-                        //             'pengembalian',
-                        //             'show_pengembalian'
-                        //         )->name('user.pengembalian');
-                        //         Route::get('pengembalian/form', 'pengembalian_form')->name('user.form_pengembalian');
-                        //         Route::post(
-                        //             'submit_pengembalian',
-                        //             'submit_pengembalian'
-                        //         )->name('user.submit_pengembalian');
-                        //     }
-                        // );
+                        Route::controller(Pengembalian::class)->group(
+                            function () {
+                                Route::get(
+                                    'pengembalian',
+                                    'show_pengembalian'
+                                )->name('user.pengembalian');
+                                Route::get('pengembalian/form', 'pengembalian_form')->name('user.form_pengembalian');
+                                Route::post(
+                                    'submit_pengembalian',
+                                    'submit_pengembalian'
+                                )->name('user.submit_pengembalian');
+                            }
+                        );
 
-                        // Route::controller(Pesan::class)->group(
-                        //     function () {
-                        //         Route::get('/pesan-masuk', 'pesan_masuk')->name('user.pesan_masuk');
-                        //         Route::get('/pesan-terkirim', 'pesan_terkirim')->name('user.pesan_terkirim');
-                        //         Route::post('/ubah-status', 'ubah_status')->name('user.ubah_status');
-                        //         Route::post('/kirim-pesan', 'kirim_pesan')->name('user.kirim_pesan');
-                        //         Route::delete('/hapus-pesan/{id}', 'hapus_pesan')->name('user.hapus_pesan');
-                        //     }
-                        // );
+                        Route::controller(Pesan::class)->group(
+                            function () {
+                                Route::get('/pesan-masuk', 'pesan_masuk')->name('user.pesan_masuk');
+                                Route::get('/pesan-terkirim', 'pesan_terkirim')->name('user.pesan_terkirim');
+                                Route::post('/ubah-status', 'ubah_status')->name('user.ubah_status');
+                                Route::post('/kirim-pesan', 'kirim_pesan')->name('user.kirim_pesan');
+                                Route::delete('/hapus-pesan/{id}', 'hapus_pesan')->name('user.hapus_pesan');
+                            }
+                        );
 
-                        // Route::controller(Profile::class)->group(
-                        //     function () {
-                        //         Route::get(
-                        //             'profil',
-                        //             'user_profil'
-                        //         )->name('user.profil');
-                        //         Route::put(
-                        //             'profile',
-                        //             'update_profil'
-                        //         )->name('user.profil.update');
-                        //     }
-                        // );
+                        Route::controller(Profile::class)->group(
+                            function () {
+                                Route::get(
+                                    'profil',
+                                    'user_profil'
+                                )->name('user.profil');
+                                Route::put(
+                                    'profile',
+                                    'update_profil'
+                                )->name('user.profil.update');
+                            }
+                        );
                     }
                 );
             }

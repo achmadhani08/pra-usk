@@ -24,8 +24,8 @@ class Pesan extends Seeder
         ]);
 
         ModelsPesan::create([
-            'penerima_id' => 1,
-            'pengirim_id' => 2,
+            'penerima_id' => 2,
+            'pengirim_id' => 1,
             'judul' => 'Pesan Pengumuman 2',
             'isi' => 'Tes pesan kedua',
             'status' => 'terkirim',
